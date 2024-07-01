@@ -3,6 +3,8 @@
 #include <stdarg.h>
 #include <string.h>
 
+int format_str(char *s);
+
 /**
  * _printf - produces output according to a format
  * @format: character stream composed of zero or more directives
@@ -29,7 +31,7 @@ int _printf(const char *format, ...)
 		{
 			if (format[i + 1] == 's')
 			{
-				count += _putchar(va_arg(args, int));
+				count += format_str(va_arg(args, char *));
 				i++;
 			}
 			else if (format[i + 1] == 'c')
@@ -47,6 +49,28 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(args);
+
+	return (count);
+}
+
+/**
+ * format_str - prints a string to stdout
+ * @s: string to print
+ *
+ * Return: number bytes printed to stdout
+ */
+int format_str(char *s)
+{
+	int count;
+	int i;
+
+	i = 0;
+	count = 0;
+	while (s[i] != '\0')
+	{
+		count += _putchar(s[i]);
+		i++;
+	}
 
 	return (count);
 }
