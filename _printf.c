@@ -13,28 +13,38 @@ int _printf(const char *format, ...)
 {
 	int count;
 	int i;
-	char c;
 	va_list args;
 
 	va_start(args, format);
 
-	if (strcmp(format, "%c") == 0)
+	i = 0;
+	while (format[i] != '\0')
 	{
-		c = va_arg(args, int);
-		count = write(1, &c, 1);
-	}
-	else
-	{
-		i = 0;
-		while (format[i] != '\0')
+		if (format[i] != '%')
 		{
-			i++;
+			_putchar(format[i]);
 		}
-
-		count = write(1, format, i);
+		else
+		{
+			if (format[i + 1] == 's')
+			{
+				_putchar(va_arg(args, int));
+				i++;
+			}
+			else if (format[i + 1] == 'c')
+			{
+				_putchar(va_arg(args, int));
+				i++;
+			}
+			else if (format[i + 1] == '%')
+			{
+				_putchar(va_arg(args, int));
+				i++;
+			}
+		}
+		i++;
 	}
-
-
+	count = i;
 
 	va_end(args);
 
