@@ -18,33 +18,33 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 
 	i = 0;
+	count = 0;
 	while (format[i] != '\0')
 	{
 		if (format[i] != '%')
 		{
-			_putchar(format[i]);
+			count += _putchar(format[i]);
 		}
 		else
 		{
 			if (format[i + 1] == 's')
 			{
-				_putchar(va_arg(args, int));
+				count += _putchar(va_arg(args, int));
 				i++;
 			}
 			else if (format[i + 1] == 'c')
 			{
-				_putchar(va_arg(args, int));
+				count += _putchar(va_arg(args, int));
 				i++;
 			}
 			else if (format[i + 1] == '%')
 			{
-				_putchar(va_arg(args, int));
+				count += _putchar(va_arg(args, int));
 				i++;
 			}
 		}
 		i++;
 	}
-	count = i - 1;
 
 	va_end(args);
 
