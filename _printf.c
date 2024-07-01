@@ -44,7 +44,7 @@ int _printf(const char *format, ...)
 		}
 		i++;
 	}
-	count = i;
+	count = i - 1;
 
 	va_end(args);
 
