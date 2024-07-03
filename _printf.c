@@ -59,6 +59,12 @@ int _printf(const char *format, ...)
 				count += format_str(int_s);
 				i++;
 			}
+			else if (format[i + 1] == 'i')
+			{
+				int_str(va_arg(args, int), int_s);
+				count += format_str(int_s);
+				i++;
+			}
 			else
 			{
 				if (format[i + 1])
