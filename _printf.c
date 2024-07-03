@@ -48,6 +48,10 @@ int _printf(const char *format, ...)
 				count += _putchar('%');
 				i++;
 			}
+			else
+			{
+				return (-1);
+			}
 		}
 		i++;
 	}
