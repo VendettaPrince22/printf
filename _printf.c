@@ -50,7 +50,17 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				return (-1);
+				if (format[i + 1])
+				{
+					count += _putchar('%');
+					count += _putchar(format[i + 1]);
+					i++;
+				}
+				else
+				{
+					return (-1);
+				}
+
 			}
 		}
 		i++;
