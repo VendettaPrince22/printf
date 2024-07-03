@@ -2,8 +2,11 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 int format_str(char *s);
+void int_str(int num, char *s);
 
 /**
  * _printf - produces output according to a format
@@ -16,8 +19,10 @@ int _printf(const char *format, ...)
 	int count;
 	int i;
 	va_list args;
+	char *int_s;
 
 	va_start(args, format);
+	int_s = malloc(sizeof(char *));
 
 	i = 0;
 	count = 0;
@@ -46,6 +51,12 @@ int _printf(const char *format, ...)
 			else if (format[i + 1] == '%')
 			{
 				count += _putchar('%');
+				i++;
+			}
+			else if (format[i + 1] == 'd')
+			{
+				int_str(va_arg(args, int), int_s);
+				count += format_str(int_s);
 				i++;
 			}
 			else
@@ -98,4 +109,43 @@ int format_str(char *s)
 	}
 
 	return (count);
+}
+
+/**
+ * int_str - converts an integer to string
+ * @num: number to convert
+ * @s: string representation of the integer
+ */
+void int_str(int num, char *s)
+{
+	int i;
+	int sign;
+	char temp;
+	int j;
+	int k;
+
+	i = 0;
+	sign = num;
+
+	if (num < 0)
+	{
+		num = -num;
+	}
+
+	do {
+		s[i++] = num % 10 + '0';
+	} while ((num /= 10) > 0);
+
+	if (sign < 0)
+	{
+		s[i++] = '-';
+	}
+	s[i] = '\0';
+
+	for (j = 0, k = i - 1; j < k; j++, k--)
+	{
+		temp = s[j];
+		s[j] = s[k];
+		s[k] = temp;
+	}
 }
