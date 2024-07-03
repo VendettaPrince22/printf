@@ -63,9 +63,16 @@ int format_str(char *s)
 {
 	int count;
 	int i;
+	char *non_num;
+
+	non_num = "(null)";
 
 	i = 0;
 	count = 0;
+	if (s == (char *)0)
+	{
+		s = non_num;
+	}
 	while (s[i] != '\0')
 	{
 		count += _putchar(s[i]);
